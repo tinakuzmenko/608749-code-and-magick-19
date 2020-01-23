@@ -9,7 +9,7 @@ var CONTENT_X = CLOUD_X + CONTENT_GAP;
 var CONTENT_Y = CLOUD_Y + CONTENT_GAP;
 var TEXT_WIDTH = 50;
 var BAR_WIDTH = 40;
-var barHeight = 150;
+var BAR_MAX_HEIGHT = 150;
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -52,7 +52,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   for (var i = 0; i < names.length; i++) {
     var currentX = CONTENT_X + (BAR_WIDTH + TEXT_WIDTH) * i;
-    var currenBarHeight = (barHeight * times[i]) / maxTime;
+    var currenBarHeight = (BAR_MAX_HEIGHT * times[i]) / maxTime;
     var currentY = CLOUD_HEIGHT - CONTENT_GAP - GAP - currenBarHeight;
     var currentTime = Math.floor(times[i]);
 
