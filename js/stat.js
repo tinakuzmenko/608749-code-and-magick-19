@@ -38,7 +38,7 @@ var paintBar = function (ctx, currentPlayer) {
   var saturation = (Math.random() * 100) + '%';
   var randomBlue = 'hsl(240, ' + saturation + ', 50%)';
 
-  ctx.fillStyle = currentPlayer === 'Вы' ? 'hsl(0, 100%, 50%)' : randomBlue;
+  ctx.fillStyle = currentPlayer === 'Вы' ? 'rgba(255, 0, 0, 1)' : randomBlue;
 };
 
 window.renderStatistics = function (ctx, names, times) {
