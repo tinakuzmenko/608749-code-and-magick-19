@@ -38,11 +38,7 @@ var paintBar = function (ctx, currentPlayer) {
   var saturation = (Math.random() * 100) + '%';
   var randomBlue = 'hsl(240, ' + saturation + ', 50%)';
 
-  if (currentPlayer === 'Вы') {
-    ctx.fillStyle = 'hsl(0, 100%, 50%)';
-  } else {
-    ctx.fillStyle = randomBlue;
-  }
+  ctx.fillStyle = currentPlayer === 'Вы' ? 'hsl(0, 100%, 50%)' : randomBlue;
 };
 
 window.renderStatistics = function (ctx, names, times) {
