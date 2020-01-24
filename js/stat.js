@@ -36,13 +36,13 @@ var getMaxElement = function (arr) {
 
 var getRandomInt = function (max) {
   return Math.floor(Math.random() * Math.floor(max));
-}
+};
 
 var getRandomColorSaturation = function (hue, lightness) {
   var saturation = getRandomInt(100);
   var randomSaturation = 'hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)';
   return randomSaturation;
-}
+};
 
 window.renderStatistics = function (ctx, names, times) {
   renderRectangle(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
