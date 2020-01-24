@@ -190,24 +190,21 @@
 
   var SPEED_LEFT = 5;
   var SPEED_RIGHT = 2;
-  var WIZARD_HEIGHT_COEFFICIENT = 1.337;
-  var SCREEN_WIDTH_COEFFICIENT = 2;
-  var SCREEN_HEIGHT_COEFFICIENT = 3;
 
   var getFireballSpeed = function (left) {
     return left ? SPEED_LEFT : SPEED_RIGHT;
   }
 
   var getWizardHeight = function () {
-    return wizardWidth * WIZARD_HEIGHT_COEFFICIENT;
+    return wizardWidth * 1.337;
   }
 
   var getWizardX = function (width) {
-    return (width - wizardWidth) / SCREEN_WIDTH_COEFFICIENT;
+    return (width - wizardWidth) / 2;
   }
 
   var getWizardY = function (height) {
-    return height / SCREEN_HEIGHT_COEFFICIENT;
+    return height / 3;
   }
 </script>
 <script src="js/stat.js"></script>
