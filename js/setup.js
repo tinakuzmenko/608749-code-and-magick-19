@@ -5,27 +5,28 @@ var PLAYERS_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', '
 var WIZARDS_COATS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARDS_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
 
-var gameSetup = document.querySelector('.setup');
-gameSetup.classList.remove('hidden');
+var setupModal = document.querySelector('.setup');
+setupModal.classList.remove('hidden');
 
-var similarListElement = gameSetup.querySelector('.setup-similar-list');
+var similarWizardsList = setupModal.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 var wizards = [];
-var shownWizards = 4;
+var wizardsAmount = 4;
+var fragment = document.createDocumentFragment();
 
 var getRandomElement = function (arr) {
-  var arrRandomElement = Math.floor(Math.random() * Math.floor(arr.length - 1));
-  return arr[arrRandomElement];
+  var randomIndex = Math.floor(Math.random() * Math.floor(arr.length - 1));
+  return arr[randomIndex];
 };
 
-var createRandomWizard = function (wizardsArr, names, surnames, coats, eyes) {
+var createRandomWizard = function (names, surnames, coats, eyes) {
   var randomWizard = {
     name: [getRandomElement(names), getRandomElement(surnames)].join(' '),
     coatColor: getRandomElement(coats),
     eyesColor: getRandomElement(eyes)
   };
 
-  return wizardsArr.push(randomWizard);
+  return randomWizard;
 };
 
 var renderWizard = function (wizard) {
@@ -38,13 +39,10 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-var fragment = document.createDocumentFragment();
-
-for (var i = 0; i < shownWizards; i++) {
-  createRandomWizard(wizards, PLAYERS_NAMES, PLAYERS_SURNAMES, WIZARDS_COATS, WIZARDS_EYES);
+for (var i = 0; i < wizardsAmount; i++) {
+  wizards.push(createRandomWizard(PLAYERS_NAMES, PLAYERS_SURNAMES, WIZARDS_COATS, WIZARDS_EYES));
   fragment.appendChild(renderWizard(wizards[i]));
 }
 
-similarListElement.appendChild(fragment);
-
-gameSetup.querySelector('.setup-similar').classList.remove('hidden');
+similarWizardsList.appendChild(fragment);
+setupModal.querySelector('.setup-similar').classList.remove('hidden');
