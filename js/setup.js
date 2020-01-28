@@ -6,17 +6,20 @@ var WIZARDS_COATS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 1
 var WIZARDS_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var setupModal = document.querySelector('.setup');
+
 setupModal.classList.remove('hidden');
 
 var similarWizardsList = setupModal.querySelector('.setup-similar-list');
-var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-var wizards = [];
-var wizardsAmount = 4;
+
+var SIMILAR_WIZARD_TEMPLATE = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+var WIZARDS = [];
+var WIZARDS_AMOUNT = 4;
+
 var fragment = document.createDocumentFragment();
 
-var getRandomElement = function (arr) {
-  var randomIndex = Math.floor(Math.random() * Math.floor(arr.length - 1));
-  return arr[randomIndex];
+var getRandomElement = function (array) {
+  var randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
 };
 
 var createRandomWizard = function (names, surnames, coats, eyes) {
@@ -29,8 +32,15 @@ var createRandomWizard = function (names, surnames, coats, eyes) {
   return randomWizard;
 };
 
-var renderWizard = function (wizard) {
-  var wizardElement = similarWizardTemplate.cloneNode(true);
+var pushElements = function (wizardsAmount, wizardsArray) {
+  for (var i = 0; i < wizardsAmount; i++) {
+    var wizardsArrayElement = createRandomWizard(PLAYERS_NAMES, PLAYERS_SURNAMES, WIZARDS_COATS, WIZARDS_EYES);
+    wizardsArray.push(wizardsArrayElement);
+  }
+};
+
+var createWizardElement = function (wizard) {
+  var wizardElement = SIMILAR_WIZARD_TEMPLATE.cloneNode(true);
 
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
@@ -39,10 +49,13 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-for (var i = 0; i < wizardsAmount; i++) {
-  wizards.push(createRandomWizard(PLAYERS_NAMES, PLAYERS_SURNAMES, WIZARDS_COATS, WIZARDS_EYES));
-  fragment.appendChild(renderWizard(wizards[i]));
-}
+var addToFragment = function (wizardsArray) {
+  for (var i = 0; i < wizardsArray.length; i++) {
+    fragment.appendChild(createWizardElement(wizardsArray[i]));
+  }
+};
 
+pushElements(WIZARDS_AMOUNT, WIZARDS);
+addToFragment(WIZARDS);
 similarWizardsList.appendChild(fragment);
 setupModal.querySelector('.setup-similar').classList.remove('hidden');
