@@ -29,12 +29,13 @@ var createRandomWizard = function () {
 };
 
 var pushElements = function (wizardsAmount) {
+  var wizardsList = [];
   for (var i = 0; i < wizardsAmount; i++) {
     var wizard = createRandomWizard();
-    wizards.push(wizard);
+    wizardsList.push(wizard);
   }
 
-  return wizards;
+  return wizardsList;
 };
 
 var createWizardElement = function (wizard) {
@@ -55,6 +56,6 @@ var addToFragment = function (wizardsList) {
   return fragment;
 };
 
-pushElements(WIZARDS_AMOUNT);
+wizards = pushElements(WIZARDS_AMOUNT);
 similarWizardsList.appendChild(addToFragment(wizards));
 setupModal.querySelector('.setup-similar').classList.remove('hidden');
