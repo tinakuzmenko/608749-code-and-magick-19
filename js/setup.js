@@ -29,13 +29,12 @@ var createRandomWizard = function () {
 };
 
 var pushElements = function (wizardsAmount) {
-  var array = [];
   for (var i = 0; i < wizardsAmount; i++) {
     var wizard = createRandomWizard();
-    array.push(wizard);
+    wizards.push(wizard);
   }
 
-  return array;
+  return wizards;
 };
 
 var createWizardElement = function (wizard) {
@@ -48,14 +47,14 @@ var createWizardElement = function (wizard) {
   return wizardElement;
 };
 
-var addToFragment = function () {
+var addToFragment = function (wizardsList) {
   var fragment = document.createDocumentFragment();
-  for (var i = 0; i < wizards.length; i++) {
-    fragment.appendChild(createWizardElement(wizards[i]));
+  for (var i = 0; i < wizardsList.length; i++) {
+    fragment.appendChild(createWizardElement(wizardsList[i]));
   }
   return fragment;
 };
 
-wizards = pushElements(WIZARDS_AMOUNT);
-similarWizardsList.appendChild(addToFragment());
+pushElements(WIZARDS_AMOUNT);
+similarWizardsList.appendChild(addToFragment(wizards));
 setupModal.querySelector('.setup-similar').classList.remove('hidden');
