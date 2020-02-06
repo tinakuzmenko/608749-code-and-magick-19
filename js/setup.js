@@ -5,10 +5,10 @@ var PLAYERS_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', '
 var WIZARDS_COATS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARDS_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
 var WIZARDS_AMOUNT = 4;
+var ENTER = 'Enter';
+var ESC = 'Escape';
 
 var setupModal = document.querySelector('.setup');
-
-setupModal.classList.remove('hidden');
 
 var similarWizardsList = setupModal.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
@@ -59,3 +59,40 @@ var addToFragment = function (wizardsList) {
 wizards = pushElements(WIZARDS_AMOUNT);
 similarWizardsList.appendChild(addToFragment(wizards));
 setupModal.querySelector('.setup-similar').classList.remove('hidden');
+
+// Учебный проект: одеть Надежду
+
+var setupOpen = document.querySelector('.setup-open');
+var setupIcon = document.querySelector('.setup-open-icon');
+var setupClose = setupModal.querySelector('.setup-close');
+
+var closeKeydownHandler = function (evt) {
+  if (evt.key === ESC) {
+    setupModal.classList.add('hidden');
+    window.removeEventListener('keydown', closeKeydownHandler);
+  }
+};
+
+setupOpen.addEventListener('click', function () {
+  setupModal.classList.remove('hidden');
+  window.addEventListener('keydown', closeKeydownHandler);
+});
+
+setupIcon.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER) {
+    setupModal.classList.remove('hidden');
+    window.addEventListener('keydown', closeKeydownHandler);
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  setupModal.classList.add('hidden');
+  window.removeEventListener('keydown', closeKeydownHandler);
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER) {
+    setupModal.classList.add('hidden');
+    window.removeEventListener('keydown', closeKeydownHandler);
+  }
+});
