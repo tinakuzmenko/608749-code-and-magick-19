@@ -91,17 +91,6 @@ var closeKeydownHandler = function (evt) {
   }
 };
 
-var checkNameInputValidity = function (evt) {
-  var target = evt.target;
-  if (target.value.length < MIN_NAME_LENGTH) {
-    userNameInput.setCustomValidity('Имя должно состоять минимум из ' + MIN_NAME_LENGTH + '-х символов');
-  } else if (target.value.length > MAX_NAME_LENGTH) {
-    userNameInput.setCustomValidity('Имя не должно превышать ' + MAX_NAME_LENGTH + '-ти символов');
-  } else {
-    userNameInput.setCustomValidity('');
-  }
-};
-
 setupOpen.addEventListener('click', function () {
   openSetupModal();
 });
@@ -121,6 +110,19 @@ setupClose.addEventListener('keydown', function (evt) {
     closeSetupModal();
   }
 });
+
+// Валидация имени персонажа
+
+var checkNameInputValidity = function (evt) {
+  var target = evt.target;
+  if (target.value.length < MIN_NAME_LENGTH) {
+    userNameInput.setCustomValidity('Имя должно состоять минимум из ' + MIN_NAME_LENGTH + '-х символов');
+  } else if (target.value.length > MAX_NAME_LENGTH) {
+    userNameInput.setCustomValidity('Имя не должно превышать ' + MAX_NAME_LENGTH + '-ти символов');
+  } else {
+    userNameInput.setCustomValidity('');
+  }
+};
 
 userNameInput.addEventListener('invalid', checkNameInputValidity);
 
