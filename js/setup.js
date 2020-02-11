@@ -68,50 +68,50 @@ setupModal.querySelector('.setup-similar').classList.remove('hidden');
 
 // Открытие окна настройки персонажа
 
-var setupOpenClickHandler = document.querySelector('.setup-open');
-var setupIconClickHandler = document.querySelector('.setup-open-icon');
-var setupCloseClickHandler = setupModal.querySelector('.setup-close');
+var setupOpen = document.querySelector('.setup-open');
+var setupIcon = document.querySelector('.setup-open-icon');
+var setupClose = setupModal.querySelector('.setup-close');
 var userNameInput = setupModal.querySelector('.setup-user-name');
 
-var closeSetupModal = function () {
+var closeSetupClickHandler = function () {
   setupModal.classList.add('hidden');
   document.removeEventListener('keydown', closeKeydownHandler);
 };
 
-var openSetupModal = function () {
+var closeKeydownHandler = function (evt) {
+  if (userNameInput !== document.activeElement && evt.key === ESC_KEY) {
+    closeSetupClickHandler();
+  }
+};
+
+var openSetupClickHandler = function () {
   setupModal.classList.remove('hidden');
   document.addEventListener('keydown', closeKeydownHandler);
 };
 
-var closeKeydownHandler = function (evt) {
-  if (userNameInput !== document.activeElement && evt.key === ESC_KEY) {
-    closeSetupModal();
-  }
-};
-
-setupOpenClickHandler.addEventListener('click', function () {
-  openSetupModal();
+setupOpen.addEventListener('click', function () {
+  openSetupClickHandler();
 });
 
-setupIconClickHandler.addEventListener('keydown', function (evt) {
+setupIcon.addEventListener('keydown', function (evt) {
   if (evt.key === ENTER_KEY) {
-    openSetupModal();
+    openSetupClickHandler();
   }
 });
 
-setupCloseClickHandler.addEventListener('click', function () {
-  closeSetupModal();
+setupClose.addEventListener('click', function () {
+  closeSetupClickHandler();
 });
 
-setupCloseClickHandler.addEventListener('keydown', function (evt) {
+setupClose.addEventListener('keydown', function (evt) {
   if (evt.key === ENTER_KEY) {
-    closeSetupModal();
+    closeSetupClickHandler();
   }
 });
 
 // Валидация имени персонажа
 
-var checkNameInputValidity = function (evt) {
+var inputInvalidHandler = function (evt) {
   var target = evt.target;
   if (target.value.length < MIN_NAME_LENGTH) {
     userNameInput.setCustomValidity('Имя должно состоять минимум из ' + MIN_NAME_LENGTH + '-х символов');
@@ -122,20 +122,20 @@ var checkNameInputValidity = function (evt) {
   }
 };
 
-userNameInput.addEventListener('invalid', checkNameInputValidity);
+userNameInput.addEventListener('invalid', inputInvalidHandler);
 
 // Изменение настроек персонажа
 
 var setupPlayer = document.querySelector('.setup-player');
 var setupWizard = setupPlayer.querySelector('.setup-wizard');
 
-var wizardCoatClickHandler = setupWizard.querySelector('.wizard-coat');
+var wizardCoat = setupWizard.querySelector('.wizard-coat');
 var coatInput = setupPlayer.querySelector('input[name="coat-color"]');
 
-var wizardEyesClickHandler = setupWizard.querySelector('.wizard-eyes');
+var wizardEyes = setupWizard.querySelector('.wizard-eyes');
 var eyesInput = setupPlayer.querySelector('input[name="eyes-color"]');
 
-var wizardFireballClickHandler = setupPlayer.querySelector('.setup-fireball-wrap');
+var wizardFireball = setupPlayer.querySelector('.setup-fireball-wrap');
 var fireballInput = setupPlayer.querySelector('input[name="fireball-color"]');
 
 var setNewFillColor = function (colors, wizardElement, input) {
@@ -150,14 +150,14 @@ var setNewBackgroundColor = function (colors, wizardElement, input) {
   input.value = newColor;
 };
 
-wizardCoatClickHandler.addEventListener('click', function () {
-  setNewFillColor(WIZARDS_COATS, wizardCoatClickHandler, coatInput);
+wizardCoat.addEventListener('click', function () {
+  setNewFillColor(WIZARDS_COATS, wizardCoat, coatInput);
 });
 
-wizardEyesClickHandler.addEventListener('click', function () {
-  setNewFillColor(WIZARDS_EYES, wizardEyesClickHandler, eyesInput);
+wizardEyes.addEventListener('click', function () {
+  setNewFillColor(WIZARDS_EYES, wizardEyes, eyesInput);
 });
 
-wizardFireballClickHandler.addEventListener('click', function () {
-  setNewBackgroundColor(WIZARDS_FIREBALLS, wizardFireballClickHandler, fireballInput);
+wizardFireball.addEventListener('click', function () {
+  setNewBackgroundColor(WIZARDS_FIREBALLS, wizardFireball, fireballInput);
 });
