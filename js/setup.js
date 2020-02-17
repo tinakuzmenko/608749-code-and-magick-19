@@ -14,13 +14,13 @@
   var fireballInput = setupPlayer.querySelector('input[name="fireball-color"]');
 
   var setNewFillColor = function (colors, wizardElement, input) {
-    var newColor = window.randomElement(colors);
+    var newColor = window.util.randomElement(colors);
     wizardElement.style.fill = newColor;
     input.value = newColor;
   };
 
   var setNewBackgroundColor = function (colors, wizardElement, input) {
-    var newColor = window.randomElement(colors);
+    var newColor = window.util.randomElement(colors);
     wizardElement.style.backgroundColor = newColor;
     input.value = newColor;
   };

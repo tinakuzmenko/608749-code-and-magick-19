@@ -12,9 +12,9 @@
 
   var createRandomWizard = function () {
     var randomWizard = {
-      name: [window.randomElement(PLAYERS_NAMES), window.randomElement(PLAYERS_SURNAMES)].join(' '),
-      coatColor: window.randomElement(window.color.WIZARDS_COATS),
-      eyesColor: window.randomElement(window.color.WIZARDS_EYES)
+      name: [window.util.randomElement(PLAYERS_NAMES), window.util.randomElement(PLAYERS_SURNAMES)].join(' '),
+      coatColor: window.util.randomElement(window.color.WIZARDS_COATS),
+      eyesColor: window.util.randomElement(window.color.WIZARDS_EYES)
     };
 
     return randomWizard;
