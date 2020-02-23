@@ -4,10 +4,12 @@
   var DEFAULT_SETUP_LEFT = '50%';
   var DEFAULT_SETUP_TOP = '80px';
 
+  var setupModal = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupIcon = document.querySelector('.setup-open-icon');
-  var setupModal = document.querySelector('.setup');
   var setupClose = setupModal.querySelector('.setup-close');
+  var setupForm = setupModal.querySelector('.setup-wizard-form');
+  var setupSubmitButton = setupModal.querySelector('.setup-submit');
   var userNameInput = setupModal.querySelector('.setup-user-name');
   var dialogHandler = setupModal.querySelector('.upload');
 
@@ -93,5 +95,20 @@
 
     document.addEventListener('mousemove', dialogMouseMoveHandler);
     document.addEventListener('mouseup', dialogMouseUpHandler);
+  });
+
+  var successHandler = function () {
+    setupModal.classList.add('hidden');
+    setupSubmitButton.textContent = 'Сохранить';
+    setupSubmitButton.disabled = false;
+  };
+
+  var errorHandler = window.error.errorHandler;
+
+  setupForm.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(setupForm), successHandler, errorHandler);
+    evt.preventDefault();
+    setupSubmitButton.textContent = 'Данные отправляются...';
+    setupSubmitButton.disabled = true;
   });
 })();
