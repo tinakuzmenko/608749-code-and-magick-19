@@ -17,7 +17,7 @@
     return wizardElement;
   };
 
-  var succesHandler = function (wizards) {
+  var loadSimilarWizardsHandler = function (wizards) {
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < WIZARDS_AMOUNT; i++) {
@@ -31,5 +31,5 @@
 
   var errorHandler = window.error.errorHandler;
 
-  window.backend.load(succesHandler, errorHandler);
+  window.backend.load(loadSimilarWizardsHandler, errorHandler);
 })();
