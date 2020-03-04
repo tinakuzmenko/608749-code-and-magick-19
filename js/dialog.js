@@ -103,7 +103,7 @@
     setupSubmitButton.disabled = false;
   };
 
-  var errorHandler = window.data.errorHandler;
+  var errorHandler = window.error.handler;
 
   setupForm.addEventListener('submit', function (evt) {
     window.backend.save(new FormData(setupForm), successHandler, errorHandler);

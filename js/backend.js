@@ -5,30 +5,40 @@
   var LOAD_URL = 'https://js.dump.academy/code-and-magick/data';
   var SEND_URL = 'https://js.dump.academy/code-and-magick';
 
+  var Code = {
+    SUCCESS: 200,
+    REQUEST_ERROR: 400,
+    ACCESS_ERROR: 403,
+    NOT_FOUND_ERROR: 404,
+    SERVER_ERROR: 500,
+    RESPONSE_ERROR: 502,
+    SERVICE_UNAVIALABLE: 503
+  };
+
   var processServerStatus = function (xhr, onLoad, onError) {
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === Code.SUCCESS) {
         onLoad(xhr.response);
       } else {
         switch (xhr.status) {
-          case 400:
+          case Code.REQUEST_ERROR:
             onError('Неверный запрос');
             break;
-          case 403:
+          case Code.ACCESS_ERROR:
             onError('Доступ запрещен');
             break;
-          case 404:
+          case Code.NOT_FOUND_ERROR:
             onError('Ничего не найдено');
             break;
-          case 500:
+          case Code.SERVER_ERROR:
             onError('Ошибка сервера');
             break;
-          case 502:
+          case Code.RESPONSE_ERROR:
             onError('Неверный ответ сервера');
             break;
-          case 503:
+          case Code.SERVICE_UNAVIALABLE:
             onError('Сервер временно недоступен');
             break;
           default:
