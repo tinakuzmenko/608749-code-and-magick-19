@@ -51,6 +51,8 @@
   });
 
   var successHandler = function (data) {
+    coatColor = window.setup.Color.DEFAULT_COAT;
+    eyesColor = window.setup.Color.DEFAULT_EYES;
     wizards = data;
     updateWizards();
   };
