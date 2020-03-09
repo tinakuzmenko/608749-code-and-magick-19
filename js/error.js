@@ -14,6 +14,6 @@
   };
 
   window.error = {
-    errorHandler: errorHandler
+    handler: errorHandler
   };
 })();

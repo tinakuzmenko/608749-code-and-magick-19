@@ -5,39 +5,45 @@
   var LOAD_URL = 'https://js.dump.academy/code-and-magick/data';
   var SEND_URL = 'https://js.dump.academy/code-and-magick';
 
+  var Code = {
+    SUCCESS: 200,
+    REQUEST_ERROR: 400,
+    ACCESS_ERROR: 403,
+    NOT_FOUND_ERROR: 404,
+    SERVER_ERROR: 500,
+    RESPONSE_ERROR: 502,
+    SERVICE_UNAVIALABLE: 503
+  };
+
   var processServerStatus = function (xhr, onLoad, onError) {
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      var error;
-      switch (xhr.status) {
-        case 200:
-          onLoad(xhr.response);
-          break;
-        case 400:
-          error = 'Неверный запрос';
-          break;
-        case 403:
-          error = 'Доступ запрещен';
-          break;
-        case 404:
-          error = 'Ничего не найдено';
-          break;
-        case 500:
-          error = 'Ошибка сервера';
-          break;
-        case 502:
-          error = 'Неверный ответ сервера';
-          break;
-        case 503:
-          error = 'Сервер временно недоступен';
-          break;
-        default:
-          error = 'Cтатус ответа: : ' + xhr.status + ' ' + xhr.statusText;
-      }
-
-      if (error) {
-        onError(error);
+      if (xhr.status === Code.SUCCESS) {
+        onLoad(xhr.response);
+      } else {
+        switch (xhr.status) {
+          case Code.REQUEST_ERROR:
+            onError('Неверный запрос');
+            break;
+          case Code.ACCESS_ERROR:
+            onError('Доступ запрещен');
+            break;
+          case Code.NOT_FOUND_ERROR:
+            onError('Ничего не найдено');
+            break;
+          case Code.SERVER_ERROR:
+            onError('Ошибка сервера');
+            break;
+          case Code.RESPONSE_ERROR:
+            onError('Неверный ответ сервера');
+            break;
+          case Code.SERVICE_UNAVIALABLE:
+            onError('Сервер временно недоступен');
+            break;
+          default:
+            onError('Cтатус ответа: : ' + xhr.status + ' ' + xhr.statusText);
+        }
       }
     });
 
