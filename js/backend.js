@@ -2,8 +2,8 @@
 
 (function () {
   var TIMEOUT_IN_MS = 10000;
-  var LOAD_URL = 'https://js.dump.academy/code-and-magick/data';
-  var SEND_URL = 'https://js.dump.academy/code-and-magick';
+  var LOAD_URL = 'https://javascript.pages.academy/code-and-magick/data';
+  var SEND_URL = 'https://javascript.pages.academy/code-and-magick';
 
   var Code = {
     SUCCESS: 200,
